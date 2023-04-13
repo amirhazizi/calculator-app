@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "t-build": "tailwindcss -i ./src/css/input.css -o ./src/css/styles.css",
+    "t-watch": "tailwindcss -i ./src/css/input.css -o ./src/css/styles.css --watch"
   },
   "dependencies": {
     "react": "^18.2.0",
