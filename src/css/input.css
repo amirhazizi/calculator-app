@@ -87,14 +87,38 @@ main>div {
 
 #theme-range {
     -webkit-appearance: none;
+
+    appearance: none;
     height: 1.55rem;
     padding: 0 .325rem;
     background: var(--cl-keypad-background);
 }
 
+#theme-range::-moz-range-track {
+    -moz-appearance: none;
+    appearance: none;
+    height: 1.55rem;
+    padding: 0 .325rem;
+    border-radius: 50rem;
+    background: var(--cl-keypad-background);
+}
+
 #theme-range::-webkit-slider-thumb {
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: var(--cl-key-background-toggle);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 500rem;
+    cursor: pointer;
+}
+
+#theme-range::-moz-range-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--cl-key-background-toggle);
+    border: none;
     width: 1rem;
     height: 1rem;
     border-radius: 500rem;
@@ -123,6 +147,7 @@ main>div {
 }
 
 .cal-btns:hover {
+    -webkit-filter: brightness(115%);
     filter: brightness(115%);
 }
 
@@ -142,6 +167,7 @@ main>div {
 .cal-btns[value='del']:hover,
 .cal-btns[value='reset']:hover,
 .cal-btns[value='=']:hover {
+    -webkit-filter: brightness(115%);
     filter: brightness(115%);
 }
 

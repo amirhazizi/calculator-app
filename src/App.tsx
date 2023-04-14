@@ -141,7 +141,7 @@ function App() {
   }, [firstValue, operator, secondValue])
   return (
     <main className={`grid relative place-items-center min-h-screen ${theme}`}>
-      <div className='space-y-5 mx-auto my-10 md:my-0 md:space-y-7'>
+      <div className='space-y-5 mx-auto my-10 md:my-0 md:space-y-6'>
         <div className='header flex justify-between items-center '>
           <h1 className='text-4xl md:text-3xl'>calc</h1>
           <div className='flex gap-x-4 items-center justify-end md:items-center'>
@@ -172,13 +172,13 @@ function App() {
             </label>
           </div>
         </div>
-        <div className='output-screen rounded-lg h-24 flex items-center justify-end p-5 relative px-7'>
+        <div className='output-screen rounded-lg h-24 flex items-center justify-end p-5 relative px-7 md:h-28 md:p-6 md:px-8'>
           <p className='absolute top-2 left-0 text-gray-600 translate-x-5 text-base'>
             {previewResult}
           </p>
           <p className='text-5xl pt-2'>{preview}</p>
         </div>
-        <div className='keys-container grid p-6 grid-cols-4 rounded-lg gap-3 md:gap-6 items-center'>
+        <div className='keys-container grid p-6 grid-cols-4 rounded-lg gap-3 md:gap-6 items-center md:p-7'>
           <button onClick={() => setValues("7")} className='cal-btns'>
             7
           </button>
