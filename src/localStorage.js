@@ -1,6 +1,6 @@
 const localedata = JSON.parse(localStorage.getItem("calculate-app")) || {
   theme: 0,
-  prevResult: null,
+  prevResult: undefined,
 }
 
 export default localedata

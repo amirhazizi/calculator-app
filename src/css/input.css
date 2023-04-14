@@ -75,7 +75,6 @@ body {
 /* actual css */
 main {
     background: var(--cl-main-background);
-    transition: all 250ms ease-out;
 }
 
 main>div {

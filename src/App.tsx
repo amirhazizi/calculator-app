@@ -10,7 +10,7 @@ function App() {
   const [secondValue, setSecondValue] = useState<string[]>([])
   const [operator, setOperator] = useState("")
   const [result, setResult] = useState(0)
-  const [preview, setPreview] = useState("")
+  const [preview, setPreview] = useState("0")
   const [previewResult, setPreviewResult] = useState("")
   const calculateResult = () => {
     if (
@@ -114,8 +114,11 @@ function App() {
     }
   }, [])
   useEffect(() => {
+    console.log(firstValue.join("").length)
+
     if (
-      firstValue.length > 0 &&
+      firstValue.join("").length > 0 &&
+      firstValue &&
       operator.length === 0 &&
       secondValue.length === 0
     ) {
@@ -137,7 +140,7 @@ function App() {
     }
   }, [firstValue, operator, secondValue])
   return (
-    <main className={`grid place-items-center min-h-screen ${theme}`}>
+    <main className={`grid relative place-items-center min-h-screen ${theme}`}>
       <div className='space-y-5 mx-auto my-10 md:my-0 md:space-y-7'>
         <div className='header flex justify-between items-center '>
           <h1 className='text-4xl md:text-3xl'>calc</h1>

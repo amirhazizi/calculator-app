@@ -594,13 +594,13 @@ video {
   width: 40%;
 }
 
-.w-full {
-  width: 100%;
-}
-
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .-translate-x-1 {
@@ -833,7 +833,6 @@ body {
 
 main {
   background: var(--cl-main-background);
-  transition: all 250ms ease-out;
 }
 
 main>div {
@@ -953,10 +952,5 @@ footer a {
   .md\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
-  }
-
-  .md\:text-4xl {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
   }
 }
