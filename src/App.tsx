@@ -1,9 +1,21 @@
+import { useEffect, useState } from "react"
+
 function App() {
+  const [themeToggle, setThemeToggle] = useState(0)
+  const [theme, setTheme] = useState("theme-1")
+  const handleSubmit = (e: React.SyntheticEvent): void => {
+    e.preventDefault()
+  }
+  useEffect(() => {
+    if (themeToggle === 0) setTheme("theme-1")
+    else if (themeToggle === 1) setTheme("theme-2")
+    else setTheme("theme-3")
+  }, [themeToggle])
   return (
-    <main className='grid place-items-center min-h-screen bg-blue-900'>
+    <main className={`grid place-items-center min-h-screen ${theme}`}>
       <div className='space-y-5 mx-auto my-20'>
-        <div className='flex justify-between items-center text-white'>
-          <h1>calc</h1>
+        <div className='header flex justify-between items-center '>
+          <h1 className='text-5xl'>calc</h1>
           <div className='flex gap-x-4 items-center justify-end'>
             <p className='uppercase text-xs mt-2'>theme</p>
             <label
@@ -15,8 +27,10 @@ function App() {
                 type='range'
                 min='0'
                 max='2'
+                value={themeToggle}
+                onChange={(e) => setThemeToggle(parseInt(e.target.value))}
                 id='theme-range'
-                className='rounded-xl  bg-black w-full '
+                className='rounded-xl w-full '
               />
               <span className='absolute translate-x-2 -top-3 left-0 text-xs'>
                 1
@@ -30,10 +44,13 @@ function App() {
             </label>
           </div>
         </div>
-        <div className='rounded-lg bg-gray-900 h-24 flex items-center justify-end text-white p-5 px-7'>
+        <div className='output-screen rounded-lg h-24 flex items-center justify-end p-5 px-7'>
           <p className='text-5xl pt-2'>1234</p>
         </div>
-        <form className='grid bg-gray-800 p-6 grid-cols-4 rounded-lg gap-3 items-center'>
+        <form
+          onSubmit={handleSubmit}
+          className='keys-container grid p-6 grid-cols-4 rounded-lg gap-3 items-center'
+        >
           <button value='7' className='cal-btns'>
             7
           </button>
@@ -43,7 +60,7 @@ function App() {
           <button value='9' className='cal-btns'>
             9
           </button>
-          <button value='del' className='cal-btns text-xl uppercase h-full'>
+          <button value='del' className='cal-btns text-2xl uppercase h-full'>
             del
           </button>
           <button value='4' className='cal-btns'>
@@ -84,8 +101,8 @@ function App() {
           </button>
           <button
             type='reset'
-            value='rest'
-            className='cal-btns uppercase col-span-2 text-xl h-full'
+            value='reset'
+            className='cal-btns uppercase col-span-2 text-2xl h-full'
           >
             Reset
           </button>

@@ -524,8 +524,8 @@ video {
   position: relative;
 }
 
-.-top-2 {
-  top: -0.5rem;
+.-top-3 {
+  top: -0.75rem;
 }
 
 .left-0 {
@@ -538,10 +538,6 @@ video {
 
 .right-0 {
   right: 0px;
-}
-
-.-top-3 {
-  top: -0.75rem;
 }
 
 .col-span-2 {
@@ -648,26 +644,6 @@ video {
   border-radius: 0.75rem;
 }
 
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-blue-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
-}
-
-.bg-gray-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-}
-
-.bg-gray-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
-}
-
 .p-5 {
   padding: 1.25rem;
 }
@@ -685,14 +661,14 @@ video {
   padding-top: 0.5rem;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .text-xs {
@@ -704,61 +680,6 @@ video {
   text-transform: uppercase;
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-/* custom variables */
-
-:root {
-  /* ## Colors  */
-  /* ### Theme 1 
-    #### Backgrounds 
-    - Very dark desaturated blue (main background): hsl(222, 26%, 31%) 
-    - Very dark desaturated blue (toggle background, keypad background): hsl(223, 31%, 20%) 
-    - Very dark desaturated blue (screen background): hsl(224, 36%, 15%) 
-    #### Keys 
-    - Desaturated dark blue (key background): hsl(225, 21%, 49%) 
-    - Desaturated dark blue (key shadow): hsl(224, 28%, 35%) 
-    - Red (key background, toggle): hsl(6, 63%, 50%) 
-    - Dark red (key shadow): hsl(6, 70%, 34%) 
-    - Light grayish orange (key background): hsl(30, 25%, 89%) 
-    - Grayish orange (key shadow): hsl(28, 16%, 65%) 
-    #### Text 
-    - Very dark grayish blue: hsl(221, 14%, 31%) 
-    - White: hsl(0, 0%, 100%) */
-  /* ### Theme 2 
-    #### Backgrounds 
-    - Light gray (main background): hsl(0, 0%, 90%) - Grayish red (toggle background, keypad 
-    background): hsl(0, 5%, 81%) 
-    - Very light gray (screen background): hsl(0, 0%, 93%) 
-    #### Keys 
-    - Dark moderate cyan (key background): hsl(185, 42%, 37%) 
-    - Very dark cyan (key shadow): hsl(185, 58%, 25%) 
-    - Orange (key background, toggle): hsl(25, 98%, 40%) 
-    - Dark orange (key shadow): hsl(25, 99%, 27%)
-    - Light grayish yellow (key background): hsl(45, 7%, 89%) 
-    - Dark grayish orange (key shadow): hsl(35, 11%, 61%) 
-    #### Text
-    - Very dark grayish yellow: hsl(60, 10%, 19%) 
-    - White (text): hsl(0, 0%, 100%)  */
-  /* ### Theme 3 
-    #### Backgrounds 
-    - Very dark violet (main background): hsl(268, 75%, 9%) 
-    - Very dark violet (toggle background, keypad background, screen background): hsl(268, 71%, 12%) 
-    #### Keys 
-    - Dark violet (key background): hsl(281, 89%, 26%) 
-    - Vivid magenta (key shadow): hsl(285, 91%, 52%) 
-    - Pure cyan (key background, toggle): hsl(176, 100%, 44%) 
-    - Soft cyan (key shadow): hsl(177, 92%, 70%) 
-    - Very dark violet (key background): hsl(268, 47%, 21%) 
-    - Dark magenta (key shadow): hsl(290, 70%, 36%) #### Text 
-    - Light yellow: hsl(52, 100%, 62%) 
-    - Very dark blue: hsl(198, 20%, 13%) 
-    - White (text): hsl(0, 0%, 100%) */
-}
-
 /* global css */
 
 body {
@@ -766,48 +687,156 @@ body {
   font-size: 32px;
 }
 
+/* ### Theme 1  */
+
+.theme-1 {
+  /* ### Background */
+  --cl-main-background: hsl(222, 26%, 31%);
+  /* and toggle background */
+  --cl-keypad-background: hsl(223, 31%, 20%);
+  --cl-screen-background: hsl(224, 36%, 15%);
+  /* ### Keys */
+  --cl-key-background: hsl(30, 25%, 89%);
+  --cl-key-background-2: hsl(225, 21%, 49%);
+  --cl-key-background-toggle: hsl(6, 63%, 50%);
+  --cl-key-shadow: hsl(224, 28%, 35%);
+  --cl-key-shadow-2: hsl(6, 70%, 34%);
+  --cl-key-shadow-3: hsl(28, 16%, 65%);
+  /* ### Text */
+  --cl-text: hsl(221, 14%, 31%);
+  --cl-text-2: hsl(0, 0%, 100%);
+  --cl-text-3: hsl(0, 0%, 100%);
+  --cl-text-4: hsl(0, 0%, 100%);
+}
+
+/* ### Theme 2  */
+
+.theme-2 {
+  /* ### Background */
+  --cl-main-background: hsl(0, 0%, 90%);
+  /* and toggle background */
+  --cl-keypad-background: hsl(0, 5%, 81%);
+  --cl-screen-background: hsl(0, 0%, 93%);
+  /* ### Keys */
+  --cl-key-background: hsl(45, 7%, 89%);
+  --cl-key-background-2: hsl(185, 42%, 37%);
+  --cl-key-background-toggle: hsl(25, 98%, 40%);
+  --cl-key-shadow: hsl(185, 58%, 25%);
+  --cl-key-shadow-2: hsl(25, 99%, 27%);
+  --cl-key-shadow-3: hsl(35, 11%, 61%);
+  /* ### Text */
+  --cl-text: hsl(60, 10%, 19%);
+  --cl-text-2: hsl(60, 10%, 19%);
+  --cl-text-3: hsl(0, 0%, 100%);
+  --cl-text-4: hsl(0, 0%, 100%);
+}
+
+/* ### Theme 3  */
+
+.theme-3 {
+  /* ### Background */
+  --cl-main-background: hsl(268, 75%, 9%);
+  /* and toggle background */
+  --cl-keypad-background: hsl(268, 71%, 12%);
+  --cl-screen-background: hsl(268, 71%, 12%);
+  /* ### Keys */
+  --cl-key-background: hsl(268, 47%, 21%);
+  --cl-key-background-2: hsl(281, 89%, 26%);
+  --cl-key-background-toggle: hsl(176, 100%, 44%);
+  --cl-key-shadow: hsl(285, 91%, 52%);
+  --cl-key-shadow-2: hsl(177, 92%, 70%);
+  --cl-key-shadow-3: hsl(290, 70%, 36%);
+  /* ### Text */
+  --cl-text: hsl(52, 100%, 62%);
+  --cl-text-2: hsl(52, 100%, 62%);
+  --cl-text-3: hsl(0, 0%, 100%);
+  --cl-text-4: hsl(198, 20%, 13%);
+}
+
 /* actual css */
+
+main {
+  background: var(--cl-main-background);
+  transition: all 250ms ease-out;
+}
 
 main>div {
   width: min(87vw, 760px);
+}
+
+.header {
+  color: var(--cl-text-2)
 }
 
 #theme-range {
   -webkit-appearance: none;
   height: 1.55rem;
   padding: 0 .325rem;
+  background: var(--cl-keypad-background);
 }
 
 #theme-range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  background: red;
+  background: var(--cl-key-background-toggle);
   width: 1rem;
   height: 1rem;
   border-radius: 500rem;
   cursor: pointer;
 }
 
+.output-screen {
+  color: var(--cl-text-2);
+  background: var(--cl-screen-background);
+}
+
+/* keys */
+
+.keys-container {
+  background: var(--cl-keypad-background);
+}
+
 /* cal btns */
 
 .cal-btns {
-  background-color: white;
+  background: var(--cl-key-background);
+  color: var(--cl-text);
   border-radius: .5rem;
   padding-top: .75rem;
   padding-bottom: .5rem;
-  box-shadow: inset 0 -6px 0 rgba(112, 112, 112, 0.646);
+  box-shadow: inset 0 -6px 0 var(--cl-key-shadow-3);
+  transition: all 250ms ease-in-out;
+}
+
+.cal-btns:hover {
+  filter: brightness(115%);
 }
 
 .cal-btns[value='del'] {
-  background: blue;
-  color: white;
+  background: var(--cl-key-background-2);
+  color: var(--cl-text-3);
+  box-shadow: inset 0 -6px 0 var(--cl-key-shadow);
 }
 
 .cal-btns[value='reset'] {
-  background: blue;
-  color: white;
+  background: var(--cl-key-background-2);
+  color: var(--cl-text-3);
+  box-shadow: inset 0 -6px 0 var(--cl-key-shadow);
 }
 
 .cal-btns[value='='] {
-  background: red;
-  color: white;
+  background: var(--cl-key-background-toggle);
+  color: var(--cl-text-4);
+  box-shadow: inset 0 -6px 0 var(--cl-key-shadow-2);
+}
+
+.cal-btns[value='del']:hover {
+  filter: brightness(115%);
+}
+
+.cal-btns[value='reset']:hover {
+  filter: brightness(115%);
+}
+
+.cal-btns[value='=']:hover {
+  filter: brightness(115%);
 }
