@@ -145,3 +145,14 @@ main>div {
 .cal-btns[value='=']:hover {
     filter: brightness(115%);
 }
+
+/* footer */
+footer {
+    font-size: .9rem;
+    color: var(--cl-text-3);
+    background-color: var(--cl-keypad-background);
+}
+
+footer a {
+    color: var(--cl-text-2);
+}

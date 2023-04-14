@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
 import localedata from "./localStorage"
-// const localedata = JSON.parse(localStorage.getItem("calculate-app") || "") || {
-//   theme: 0,
-//   prevResult: null,
-// }
+import Footer from "./components/Footer"
 function App() {
   const [themeToggle, setThemeToggle] = useState(localedata?.theme)
   const [theme, setTheme] = useState("theme-1")
@@ -141,11 +138,11 @@ function App() {
   }, [firstValue, operator, secondValue])
   return (
     <main className={`grid place-items-center min-h-screen ${theme}`}>
-      <div className='space-y-5 mx-auto my-10'>
+      <div className='space-y-5 mx-auto my-10 md:my-0 md:space-y-7'>
         <div className='header flex justify-between items-center '>
-          <h1 className='text-5xl'>calc</h1>
-          <div className='flex gap-x-4 items-center justify-end'>
-            <p className='uppercase text-xs mt-2'>theme</p>
+          <h1 className='text-4xl md:text-3xl'>calc</h1>
+          <div className='flex gap-x-4 items-center justify-end md:items-center'>
+            <p className='uppercase text-xs mt-2 md:mb-1 md:mt-0'>theme</p>
             <label
               id='theme-container'
               className='relative w-2/5'
@@ -178,7 +175,7 @@ function App() {
           </p>
           <p className='text-5xl pt-2'>{preview}</p>
         </div>
-        <div className='keys-container grid p-6 grid-cols-4 rounded-lg gap-3 items-center'>
+        <div className='keys-container grid p-6 grid-cols-4 rounded-lg gap-3 md:gap-6 items-center'>
           <button onClick={() => setValues("7")} className='cal-btns'>
             7
           </button>
@@ -191,7 +188,7 @@ function App() {
           <button
             onClick={deleteValue}
             value='del'
-            className='cal-btns text-2xl uppercase h-full'
+            className='cal-btns text-2xl uppercase h-full  md:text-3xl'
           >
             del
           </button>
@@ -234,7 +231,7 @@ function App() {
           <button
             onClick={resetToDefault}
             value='reset'
-            className='cal-btns uppercase col-span-2 text-2xl h-full'
+            className='cal-btns uppercase col-span-2 text-2xl h-full md:text-3xl'
           >
             Reset
           </button>
@@ -247,6 +244,7 @@ function App() {
           </button>
         </div>
       </div>
+      <Footer />
     </main>
   )
 }
