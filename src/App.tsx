@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react"
-const localeTheme: number =
-  parseInt(JSON.parse(localStorage.getItem("calculate-app") || "")) || 0
+const localedata = JSON.parse(localStorage.getItem("calculate-app") || "") || {
+  theme: 0,
+  prevResult: null,
+}
+
 function App() {
-  const [themeToggle, setThemeToggle] = useState(localeTheme)
+  const [themeToggle, setThemeToggle] = useState(localedata?.theme)
   const [theme, setTheme] = useState("theme-1")
-  const [firstValue, setFirstValue] = useState<string[]>([])
+  const [firstValue, setFirstValue] = useState<string[]>([
+    localedata.prevResult,
+  ])
   const [secondValue, setSecondValue] = useState<string[]>([])
   const [operator, setOperator] = useState("")
   const [result, setResult] = useState(0)
@@ -26,6 +31,10 @@ function App() {
       setResult(result)
       setPreviewResult(`${preview} =`)
       setFirstValue(String(result).split(""))
+      localStorage.setItem(
+        "calculate-app",
+        JSON.stringify({ ...localedata, prevResult: result })
+      )
       setSecondValue([])
       setOperator("")
     } else if (firstValue.length > 0 && operator.length === 0) {
@@ -60,7 +69,8 @@ function App() {
       calculateResult()
       setOperator(operator)
     } else {
-      setPreview("please enter value first")
+      if (operator === "-") setFirstValue([operator])
+      else setPreview("please enter value first")
     }
   }
   const deleteValue = () => {
@@ -79,21 +89,28 @@ function App() {
     setSecondValue([])
     setOperator("")
     setPreviewResult("")
+    localStorage.setItem(
+      "calculate-app",
+      JSON.stringify({ ...localedata, prevResult: null })
+    )
   }
 
   useEffect(() => {
     if (themeToggle === 0) setTheme("theme-1")
     else if (themeToggle === 1) setTheme("theme-2")
     else setTheme("theme-3")
-    localStorage.setItem("calculate-app", JSON.stringify(themeToggle))
+    localStorage.setItem(
+      "calculate-app",
+      JSON.stringify({ ...localedata, theme: themeToggle })
+    )
   }, [themeToggle])
   useEffect(() => {
-    if (!localeTheme && localeTheme !== 0) {
+    if (localedata.theme === 0 && localedata.theme) {
       if (
         window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches
       ) {
-        setThemeToggle(3)
+        setThemeToggle(2)
       } else {
         setThemeToggle(1)
       }
