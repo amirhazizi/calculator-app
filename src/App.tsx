@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-
+const localeTheme: number =
+  parseInt(JSON.parse(localStorage.getItem("calculate-app") || "")) || 0
 function App() {
-  const [themeToggle, setThemeToggle] = useState(0)
+  const [themeToggle, setThemeToggle] = useState(localeTheme)
   const [theme, setTheme] = useState("theme-1")
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault()
@@ -10,7 +11,20 @@ function App() {
     if (themeToggle === 0) setTheme("theme-1")
     else if (themeToggle === 1) setTheme("theme-2")
     else setTheme("theme-3")
+    localStorage.setItem("calculate-app", JSON.stringify(themeToggle))
   }, [themeToggle])
+  useEffect(() => {
+    if (!localeTheme) {
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        setThemeToggle(3)
+      } else {
+        setThemeToggle(1)
+      }
+    }
+  }, [])
   return (
     <main className={`grid place-items-center min-h-screen ${theme}`}>
       <div className='space-y-5 mx-auto my-20'>
