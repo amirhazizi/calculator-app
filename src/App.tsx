@@ -9,8 +9,12 @@ function App() {
   const [operator, setOperator] = useState("")
   const [result, setResult] = useState(0)
   const [preview, setPreview] = useState("")
-  const handleSubmit = (): void => {
-    if (firstValue && operator && secondValue) {
+  const calculateResult = () => {
+    if (
+      firstValue.length > 0 &&
+      operator.length > 0 &&
+      secondValue.length > 0
+    ) {
       const value_1 = parseFloat(firstValue.join(""))
       const value_2 = parseFloat(secondValue.join(""))
       let result = 0
@@ -22,6 +26,10 @@ function App() {
       setFirstValue(String(result).split(""))
       setSecondValue([])
       setOperator("")
+    } else if (firstValue.length > 0 && operator.length === 0) {
+      setPreview("enter operator")
+    } else {
+      setPreview("enter value")
     }
   }
   const setValues = (value: string) => {
@@ -41,20 +49,31 @@ function App() {
       })
     }
   }
-  const changeOperator = (ope: string) => {
-    if (firstValue) {
-      setOperator(ope)
+  const updateOperator = (operator: string) => {
+    if (firstValue.length > 0 && secondValue.length === 0) {
+      setOperator(operator)
+    } else if (secondValue.length > 0) {
+      calculateResult()
+      setOperator(operator)
+    } else {
+      setPreview("please enter value first")
     }
-    //  else if (secondValue) {
-    // } else {
-    // }
   }
   const resetToDefault = () => {
     setFirstValue([])
     setSecondValue([])
     setOperator("")
   }
-
+  const deleteValue = () => {
+    if (firstValue.length > 0 && secondValue.length === 0) {
+      setFirstValue([])
+      setOperator("")
+    } else if (secondValue.length > 0) {
+      setSecondValue([])
+    } else {
+      setPreview("please enter value")
+    }
+  }
   useEffect(() => {
     if (themeToggle === 0) setTheme("theme-1")
     else if (themeToggle === 1) setTheme("theme-2")
@@ -74,12 +93,26 @@ function App() {
     }
   }, [])
   useEffect(() => {
-    if (firstValue && !operator && !secondValue) {
+    if (
+      firstValue.length > 0 &&
+      operator.length === 0 &&
+      secondValue.length === 0
+    ) {
       setPreview(`${firstValue.join("")}`)
-    } else if (firstValue && operator && !secondValue) {
+    } else if (
+      firstValue.length > 0 &&
+      operator.length > 0 &&
+      secondValue.length === 0
+    ) {
       setPreview(`${firstValue.join("")} ${operator}`)
-    } else {
+    } else if (
+      firstValue.length > 0 &&
+      operator.length > 0 &&
+      secondValue.length > 0
+    ) {
       setPreview(`${firstValue.join("")} ${operator} ${secondValue.join("")}`)
+    } else {
+      setPreview("0")
     }
   }, [firstValue, operator, secondValue])
   return (
@@ -128,7 +161,11 @@ function App() {
           <button onClick={() => setValues("9")} className='cal-btns'>
             9
           </button>
-          <button value='del' className='cal-btns text-2xl uppercase h-full'>
+          <button
+            onClick={deleteValue}
+            value='del'
+            className='cal-btns text-2xl uppercase h-full'
+          >
             del
           </button>
           <button onClick={() => setValues("4")} className='cal-btns'>
@@ -140,7 +177,7 @@ function App() {
           <button onClick={() => setValues("6")} className='cal-btns'>
             6
           </button>
-          <button onClick={() => changeOperator("+")} className='cal-btns'>
+          <button onClick={() => updateOperator("+")} className='cal-btns'>
             +
           </button>
           <button onClick={() => setValues("1")} className='cal-btns'>
@@ -152,7 +189,7 @@ function App() {
           <button onClick={() => setValues("3")} className='cal-btns'>
             3
           </button>
-          <button onClick={() => changeOperator("-")} className='cal-btns'>
+          <button onClick={() => updateOperator("-")} className='cal-btns'>
             -
           </button>
           <button onClick={() => setValues(".")} className='cal-btns'>
@@ -161,10 +198,10 @@ function App() {
           <button onClick={() => setValues("0")} className='cal-btns'>
             0
           </button>
-          <button onClick={() => changeOperator("/")} className='cal-btns'>
+          <button onClick={() => updateOperator("/")} className='cal-btns'>
             /
           </button>
-          <button onClick={() => changeOperator("*")} className='cal-btns'>
+          <button onClick={() => updateOperator("*")} className='cal-btns'>
             x
           </button>
           <button
@@ -175,7 +212,7 @@ function App() {
             Reset
           </button>
           <button
-            onClick={handleSubmit}
+            onClick={calculateResult}
             value='='
             className='cal-btns col-span-2'
           >
