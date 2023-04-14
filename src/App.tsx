@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-const localedata = JSON.parse(localStorage.getItem("calculate-app") || "") || {
-  theme: 0,
-  prevResult: null,
-}
-
+import localedata from "./localStorage"
+// const localedata = JSON.parse(localStorage.getItem("calculate-app") || "") || {
+//   theme: 0,
+//   prevResult: null,
+// }
 function App() {
   const [themeToggle, setThemeToggle] = useState(localedata?.theme)
   const [theme, setTheme] = useState("theme-1")
