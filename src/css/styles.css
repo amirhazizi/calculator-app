@@ -549,9 +549,9 @@ video {
   margin-right: auto;
 }
 
-.my-20 {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+.my-10 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .mt-2 {
@@ -761,7 +761,7 @@ main {
 }
 
 main>div {
-  width: min(87vw, 760px);
+  width: min(87vw, 540px);
 }
 
 .header {

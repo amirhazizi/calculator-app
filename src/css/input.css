@@ -79,7 +79,7 @@ main {
 }
 
 main>div {
-    width: min(87vw, 760px);
+    width: min(87vw, 540px);
 }
 
 .header {

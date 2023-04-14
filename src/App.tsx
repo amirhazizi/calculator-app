@@ -4,9 +4,57 @@ const localeTheme: number =
 function App() {
   const [themeToggle, setThemeToggle] = useState(localeTheme)
   const [theme, setTheme] = useState("theme-1")
-  const handleSubmit = (e: React.SyntheticEvent): void => {
-    e.preventDefault()
+  const [firstValue, setFirstValue] = useState<string[]>([])
+  const [secondValue, setSecondValue] = useState<string[]>([])
+  const [operator, setOperator] = useState("")
+  const [result, setResult] = useState(0)
+  const [preview, setPreview] = useState("")
+  const handleSubmit = (): void => {
+    if (firstValue && operator && secondValue) {
+      const value_1 = parseFloat(firstValue.join(""))
+      const value_2 = parseFloat(secondValue.join(""))
+      let result = 0
+      if (operator === "+") result = value_1 + value_2
+      else if (operator === "-") result = value_1 - value_2
+      else if (operator === "*") result = value_1 * value_2
+      else result = parseFloat((value_1 / value_2).toFixed(3))
+      setResult(result)
+      setFirstValue(String(result).split(""))
+      setSecondValue([])
+      setOperator("")
+    }
   }
+  const setValues = (value: string) => {
+    if (operator) {
+      setSecondValue((oldValues) => {
+        if (value === ".") {
+          if (oldValues.find((oldvalue) => oldvalue === ".")) return oldValues
+        }
+        return [...oldValues, value]
+      })
+    } else {
+      setFirstValue((oldValues) => {
+        if (value === ".") {
+          if (oldValues.find((oldvalue) => oldvalue === ".")) return oldValues
+        }
+        return [...oldValues, value]
+      })
+    }
+  }
+  const changeOperator = (ope: string) => {
+    if (firstValue) {
+      setOperator(ope)
+    }
+    //  else if (secondValue) {
+    // } else {
+    // }
+  }
+  const resetToDefault = () => {
+    setFirstValue([])
+    setSecondValue([])
+    setOperator("")
+  }
+
   useEffect(() => {
     if (themeToggle === 0) setTheme("theme-1")
     else if (themeToggle === 1) setTheme("theme-2")
@@ -14,7 +62,7 @@ function App() {
     localStorage.setItem("calculate-app", JSON.stringify(themeToggle))
   }, [themeToggle])
   useEffect(() => {
-    if (!localeTheme) {
+    if (!localeTheme && localeTheme !== 0) {
       if (
         window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -25,9 +73,18 @@ function App() {
       }
     }
   }, [])
+  useEffect(() => {
+    if (firstValue && !operator && !secondValue) {
+      setPreview(`${firstValue.join("")}`)
+    } else if (firstValue && operator && !secondValue) {
+      setPreview(`${firstValue.join("")} ${operator}`)
+    } else {
+      setPreview(`${firstValue.join("")} ${operator} ${secondValue.join("")}`)
+    }
+  }, [firstValue, operator, secondValue])
   return (
     <main className={`grid place-items-center min-h-screen ${theme}`}>
-      <div className='space-y-5 mx-auto my-20'>
+      <div className='space-y-5 mx-auto my-10'>
         <div className='header flex justify-between items-center '>
           <h1 className='text-5xl'>calc</h1>
           <div className='flex gap-x-4 items-center justify-end'>
@@ -59,71 +116,72 @@ function App() {
           </div>
         </div>
         <div className='output-screen rounded-lg h-24 flex items-center justify-end p-5 px-7'>
-          <p className='text-5xl pt-2'>1234</p>
+          <p className='text-5xl pt-2'>{preview}</p>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className='keys-container grid p-6 grid-cols-4 rounded-lg gap-3 items-center'
-        >
-          <button value='7' className='cal-btns'>
+        <div className='keys-container grid p-6 grid-cols-4 rounded-lg gap-3 items-center'>
+          <button onClick={() => setValues("7")} className='cal-btns'>
             7
           </button>
-          <button value='8' className='cal-btns'>
+          <button onClick={() => setValues("8")} className='cal-btns'>
             8
           </button>
-          <button value='9' className='cal-btns'>
+          <button onClick={() => setValues("9")} className='cal-btns'>
             9
           </button>
           <button value='del' className='cal-btns text-2xl uppercase h-full'>
             del
           </button>
-          <button value='4' className='cal-btns'>
+          <button onClick={() => setValues("4")} className='cal-btns'>
             4
           </button>
-          <button value='5' className='cal-btns'>
+          <button onClick={() => setValues("5")} className='cal-btns'>
             5
           </button>
-          <button value='6' className='cal-btns'>
+          <button onClick={() => setValues("6")} className='cal-btns'>
             6
           </button>
-          <button value='+' className='cal-btns'>
+          <button onClick={() => changeOperator("+")} className='cal-btns'>
             +
           </button>
-          <button value='1' className='cal-btns'>
+          <button onClick={() => setValues("1")} className='cal-btns'>
             1
           </button>
-          <button value='2' className='cal-btns'>
+          <button onClick={() => setValues("2")} className='cal-btns'>
             2
           </button>
-          <button value='3' className='cal-btns'>
+          <button onClick={() => setValues("3")} className='cal-btns'>
             3
           </button>
-          <button value='-' className='cal-btns'>
+          <button onClick={() => changeOperator("-")} className='cal-btns'>
             -
           </button>
-          <button value='.' className='cal-btns'>
+          <button onClick={() => setValues(".")} className='cal-btns'>
             .
           </button>
-          <button value='0' className='cal-btns'>
+          <button onClick={() => setValues("0")} className='cal-btns'>
             0
           </button>
-          <button value='/' className='cal-btns'>
+          <button onClick={() => changeOperator("/")} className='cal-btns'>
             /
           </button>
-          <button value='x' className='cal-btns'>
+          <button onClick={() => changeOperator("*")} className='cal-btns'>
             x
           </button>
           <button
-            type='reset'
+            onClick={resetToDefault}
             value='reset'
             className='cal-btns uppercase col-span-2 text-2xl h-full'
           >
             Reset
           </button>
-          <button type='submit' value='=' className='cal-btns col-span-2'>
+          <button
+            onClick={handleSubmit}
+            value='='
+            className='cal-btns col-span-2'
+          >
             =
           </button>
-        </form>
+        </div>
       </div>
     </main>
   )
