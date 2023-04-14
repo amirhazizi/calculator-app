@@ -9,6 +9,7 @@ function App() {
   const [operator, setOperator] = useState("")
   const [result, setResult] = useState(0)
   const [preview, setPreview] = useState("")
+  const [previewResult, setPreviewResult] = useState("")
   const calculateResult = () => {
     if (
       firstValue.length > 0 &&
@@ -23,6 +24,7 @@ function App() {
       else if (operator === "*") result = value_1 * value_2
       else result = parseFloat((value_1 / value_2).toFixed(3))
       setResult(result)
+      setPreviewResult(`${preview} =`)
       setFirstValue(String(result).split(""))
       setSecondValue([])
       setOperator("")
@@ -33,6 +35,7 @@ function App() {
     }
   }
   const setValues = (value: string) => {
+    setPreviewResult("")
     if (operator) {
       setSecondValue((oldValues) => {
         if (value === ".") {
@@ -50,6 +53,7 @@ function App() {
     }
   }
   const updateOperator = (operator: string) => {
+    setPreviewResult("")
     if (firstValue.length > 0 && secondValue.length === 0) {
       setOperator(operator)
     } else if (secondValue.length > 0) {
@@ -59,12 +63,8 @@ function App() {
       setPreview("please enter value first")
     }
   }
-  const resetToDefault = () => {
-    setFirstValue([])
-    setSecondValue([])
-    setOperator("")
-  }
   const deleteValue = () => {
+    setPreviewResult("")
     if (firstValue.length > 0 && secondValue.length === 0) {
       setFirstValue([])
       setOperator("")
@@ -74,6 +74,13 @@ function App() {
       setPreview("please enter value")
     }
   }
+  const resetToDefault = () => {
+    setFirstValue([])
+    setSecondValue([])
+    setOperator("")
+    setPreviewResult("")
+  }
+
   useEffect(() => {
     if (themeToggle === 0) setTheme("theme-1")
     else if (themeToggle === 1) setTheme("theme-2")
@@ -148,7 +155,10 @@ function App() {
             </label>
           </div>
         </div>
-        <div className='output-screen rounded-lg h-24 flex items-center justify-end p-5 px-7'>
+        <div className='output-screen rounded-lg h-24 flex items-center justify-end p-5 relative px-7'>
+          <p className='absolute top-2 left-0 text-gray-600 translate-x-5 text-base'>
+            {previewResult}
+          </p>
           <p className='text-5xl pt-2'>{preview}</p>
         </div>
         <div className='keys-container grid p-6 grid-cols-4 rounded-lg gap-3 items-center'>
